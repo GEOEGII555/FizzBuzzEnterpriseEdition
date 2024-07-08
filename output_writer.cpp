@@ -47,7 +47,6 @@ FileOutputWriter::FileOutputWriter(tstring file) {
 }
 
 void FileOutputWriter::_write(tstring str) {
-	// TODO: Broken.
 	DWORD dataWritten;
 	SetFilePointer(hFile, 0, NULL, FILE_END);
 	const TCHAR* c_str = str.c_str();
