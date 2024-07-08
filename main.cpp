@@ -4,6 +4,7 @@
 #include "argparser.hpp"
 #include "output_writer.hpp"
 #include "input_reader.hpp"
+#include "fizz_buzz_persistent_cache.hpp"
 
 // Welcome to 2024, where open source projects have a copyright.
 TCHAR copyrightMessage[] = {
@@ -13,6 +14,7 @@ TCHAR copyrightMessage[] = {
 ArgumentParser argParser;
 BaseInputReader* inputReader;
 BaseOutputWriter* outputWriter;
+FizzBuzzCacheLoader* cacheLoader;
 
 int _tmain(unsigned int argc, TCHAR* argv[]) {
 	argParser.parse(argc, argv);
@@ -36,6 +38,12 @@ int _tmain(unsigned int argc, TCHAR* argv[]) {
 	else {
 		outputWriter = new ConsoleOutputWriter();
 	}
+
+	if (argParser.cacheFile != TEXT("")) {
+		cacheLoader = new FizzBuzzCacheLoader(argParser.cacheFile);
+		cacheLoader->loadCache(fizzbuzzer.cache);
+	}
+
 	while (!inputReader->getIsInputExhausted()) {
 		try {
 			unsigned long long int value = inputReader->read();
@@ -45,5 +53,13 @@ int _tmain(unsigned int argc, TCHAR* argv[]) {
 			continue;
 		}
 	}
+
+	if (argParser.cacheFile != TEXT("")) {
+		cacheLoader->dumpCache(fizzbuzzer.cache);
+	}
+
+	delete[] cacheLoader;
+	delete[] outputWriter;
+	delete[] inputReader;
 	return 0;
 }

@@ -130,6 +130,7 @@
     <ClCompile Include="argparser.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="fizz_buzz.cpp" />
+    <ClCompile Include="fizz_buzz_persistent_cache.cpp" />
     <ClCompile Include="input_reader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="output_writer.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="console.hpp" />
     <ClInclude Include="cpp_tstring.hpp" />
     <ClInclude Include="fizz_buzz.hpp" />
+    <ClInclude Include="fizz_buzz_persistent_cache.hpp" />
     <ClInclude Include="input_reader.hpp" />
     <ClInclude Include="output_writer.hpp" />
   </ItemGroup>
