@@ -28,3 +28,8 @@ struct ConsoleInputReader : BaseInputReader {
 
 	virtual unsigned long long int read();
 };
+
+struct TestInputReader : BaseInputReader {
+	unsigned long long int i = 1;
+	virtual unsigned long long int read();
+};

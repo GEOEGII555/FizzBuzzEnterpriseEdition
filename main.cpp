@@ -21,11 +21,24 @@ int _tmain(unsigned int argc, TCHAR* argv[]) {
 		console.writeOutput(helpMessage);
 		return -1;
 	}
-	if (argParser.inputFile == TEXT("")) {
+	if (argParser.useTestInput) {
+		inputReader = new TestInputReader();
+	}
+	else if (argParser.inputFile == TEXT("")) {
 		inputReader = new ConsoleInputReader();
 	}
 	else {
 		inputReader = new FileInputReader(argParser.inputFile);
+	}
+	if (argParser.outputFilename != TEXT("")) {
+		outputWriter = new FileOutputWriter(argParser.outputFilename);
+	}
+	else {
+		outputWriter = new ConsoleOutputWriter();
+	}
+	while (!inputReader->inputExhausted) {
+		unsigned long long int value = inputReader->read();
+		outputWriter->writeOne(value, fizzbuzzer.fizzBuzz(value));
 	}
 	return 0;
 }

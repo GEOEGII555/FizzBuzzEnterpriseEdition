@@ -10,7 +10,8 @@ TCHAR helpMessage[] = TEXT("Usage: [program] [--output file] [--enable_cache cac
 \t--enable_cache [cache_file] - Enable persistent caching.\n\
 \t--input_source [source] - Specify where to read the numbers from. If you don't specify this argument, the help message will be displayed instead. [source] can be one of:\n\
 \t\tstdinput - The program's standard input. It's recommended to disable the splash if you use this option when calling FizzBuzz Enterprise Edition from an another program.\n\
-\t\tfile filename.txt - A file. If you set the source to file, you need to specify the filename right after the source argument.\n");
+\t\tfile filename.txt - A file. If you set the source to file, you need to specify the filename right after the source argument.\n\
+\t\ttestinput - A fake input source. It inputs all numbers from 1 to 100 (both sides included).\n");
 
 void ArgumentParser::parse(const unsigned int argc, const TCHAR* const argv[]) {
 	unsigned int i = 0;
@@ -61,6 +62,9 @@ void ArgumentParser::parse(const unsigned int argc, const TCHAR* const argv[]) {
 					showHelp = true;
 					break;
 				}
+			}
+			else if (lstrcmp(argv[i], TEXT("testinput")) == 0) {
+				this->useTestInput = true;
 			}
 			else {
 				showHelp = true;

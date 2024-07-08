@@ -65,3 +65,9 @@ unsigned long long int ConsoleInputReader::read() {
 	} while (currChar >= TEXT('0') && currChar <= TEXT('9'));
 	return result;
 }
+
+unsigned long long int TestInputReader::read() {
+	if (inputExhausted) throw std::exception("There's nothing more in the input.");
+	if (i == 100) inputExhausted = true;
+	return i++;
+}

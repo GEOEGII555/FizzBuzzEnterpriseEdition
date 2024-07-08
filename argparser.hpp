@@ -11,6 +11,7 @@ struct ArgumentParser {
 	tstring inputFile = TEXT("");
 	bool inputSourceSpecified = false;
 	bool noSplash = false;
+	bool useTestInput = false;
 
 	void parse(const unsigned int argc, const TCHAR* const argv[]);
 };
