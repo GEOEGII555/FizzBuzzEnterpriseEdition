@@ -4,6 +4,7 @@
 #include <vector>
 
 struct BaseOutputWriter {
+	virtual ~BaseOutputWriter() {};
 	virtual void _write(tstring str) = 0;
 	void writeOne(unsigned long long int number, FizzBuzzResult result);
 	void writeMany(std::vector<std::pair<unsigned long long int, FizzBuzzResult>> values);
@@ -19,4 +20,5 @@ struct FileOutputWriter : BaseOutputWriter {
 	FileOutputWriter(tstring file);
 
 	virtual void _write(tstring str);
+	~FileOutputWriter();
 };

@@ -103,3 +103,7 @@ bool FileInputReader::getIsInputExhausted() {
 bool ConsoleInputReader::getIsInputExhausted() {
 	return this->inputExhausted;
 }
+
+FileInputReader::~FileInputReader() {
+	CloseHandle(this->hFile);
+}

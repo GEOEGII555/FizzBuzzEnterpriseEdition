@@ -14,6 +14,7 @@ struct BaseInputReader {
 	}
 	virtual unsigned long long int read() = 0;
 	virtual std::vector<unsigned long long int> readRemainingInput();
+	virtual ~BaseInputReader() {};
 };
 
 struct FileInputReader : BaseInputReader {
@@ -23,6 +24,7 @@ struct FileInputReader : BaseInputReader {
 
 	virtual unsigned long long int read();
 	virtual bool getIsInputExhausted();
+	~FileInputReader();
 };
 
 struct ConsoleInputReader : BaseInputReader {

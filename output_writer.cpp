@@ -53,3 +53,7 @@ void FileOutputWriter::_write(tstring str) {
 	WriteFile(this->hFile, c_str, str.length() * sizeof(TCHAR), &dataWritten, NULL);
 	if (dataWritten != str.length() * sizeof(TCHAR)) abort();
 }
+
+FileOutputWriter::~FileOutputWriter() {
+	CloseHandle(this->hFile);
+}
