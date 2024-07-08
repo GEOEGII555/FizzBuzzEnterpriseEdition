@@ -4,7 +4,7 @@
 #include <unordered_map>
 
 enum class FizzBuzzResult : uint8_t {
-	UNKNOWN = 0, NONE = 1 << 0, FIZZ = 1 << 1, BUZZ = 1 << 2, FIZZBUZZ = FIZZ & BUZZ
+	UNKNOWN = 0, NONE = 1 << 0, FIZZ = 1 << 1, BUZZ = 1 << 2, FIZZBUZZ = FIZZ | BUZZ
 };
 
 struct _FizzBuzzer {

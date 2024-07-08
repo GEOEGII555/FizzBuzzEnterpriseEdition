@@ -26,10 +26,6 @@ struct FileInputReader : BaseInputReader {
 };
 
 struct ConsoleInputReader : BaseInputReader {
-	HANDLE stdOutput;
-
-	ConsoleInputReader() : stdOutput(GetStdHandle(STD_OUTPUT_HANDLE)) {};
-
 	virtual unsigned long long int read();
 	virtual bool getIsInputExhausted();
 };

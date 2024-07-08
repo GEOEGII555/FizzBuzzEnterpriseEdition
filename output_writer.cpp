@@ -5,16 +5,17 @@
 #include <algorithm>
 #include "console.hpp"
 #include <tchar.h>
+#include <algorithm>
 
 void BaseOutputWriter::writeOne(unsigned long long int number, FizzBuzzResult result) {
 	tstring str;
 	if (number == 0) str = TEXT("0");
 	else while (number != 0) {
-		str.push_back((TCHAR)(number + TEXT('0')));
+		str.push_back((TCHAR)((number % 10) + TEXT('0')));
+		number /= 10;
 	}
-	str.reserve();
+	std::reverse(str.begin(), str.end());
 	str.append(TEXT(":"));
-	
 	if ((result & FizzBuzzResult::FIZZ) != FizzBuzzResult::UNKNOWN) str.append(TEXT("Fizz"));
 	if ((result & FizzBuzzResult::BUZZ) != FizzBuzzResult::UNKNOWN) str.append(TEXT("Buzz"));
 	if ((result & FizzBuzzResult::NONE) != FizzBuzzResult::UNKNOWN) str.append(str.substr(0, str.length() - 1));

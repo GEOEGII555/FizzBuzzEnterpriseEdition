@@ -24,49 +24,68 @@ FileInputReader::FileInputReader(tstring file) {
 		console.writeError(TEXT("\n"));
 		abort();
 	}
-	DWORD fileSize;
-	GetFileSize(this->hFile, &fileSize);
+	unsigned long long int fileSize;
+	GetFileSizeEx(this->hFile, (PLARGE_INTEGER) & fileSize);
 	if (fileSize == 0) inputExhausted = true;
 }
 
-unsigned long long int FileInputReader::read() {
-	if (inputExhausted) throw std::exception("There's nothing more in the input.");
+unsigned long long int __input_reader_util_parse_ulonglong(BaseInputReader* _this, bool(*readChar)(TCHAR*, PDWORD)) {
 	TCHAR currChar = '\0';
 	DWORD temp = 0;
 	unsigned long long int result = 0;
+	if (!readChar(&currChar, &temp)) {
+		if (GetLastError() != ERROR_HANDLE_EOF) abort();
+		temp = 0;
+	}
+	if (temp == 0) {
+		_this->inputExhausted = true;
+		throw std::exception("There's nothing more in the input.");
+		return -1;
+	}
+	bool isFirstChar = true;
+	bool negative = false; // We need to read the rest of the number before throwing an exception to avoid leaving parts of a number in the buffer.
 	do {
-		if (!ReadFile(this->hFile, &currChar, 1, &temp, NULL)) {
+		// This seemingly uneccessary check is needed to fix a bug.
+		if (currChar >= TEXT('0') && currChar <= TEXT('9')) {
+			result *= 10;
+			result += currChar - TEXT('0');
+		}
+		else if (isFirstChar && currChar == TEXT('-')) {
+			negative = true;
+		}
+		if (!readChar(&currChar, &temp)) {
 			if (GetLastError() != ERROR_HANDLE_EOF) abort();
 			temp = 0;
 		}
 		if (temp == 0) {
-			inputExhausted = true;
+			_this->inputExhausted = true;
+			if (isFirstChar) throw std::exception("There's nothing more in the input.");
 			break;
 		}
-		result *= 10;
-		result += currChar - TEXT('0');
+		isFirstChar = false;
 	} while (currChar >= TEXT('0') && currChar <= TEXT('9'));
+	// Another bug fix - for CRLF line endings (\r\n), we need to skip the leftover newline.
+	if (currChar == TEXT('\r')) ReadConsole(console.input, &currChar, 1, &temp, NULL);
+	if (negative) throw std::exception("Negative numbers are not allowed."); // Why? Because.
 	return result;
+}
+
+HANDLE __temp_hFile;
+
+unsigned long long int FileInputReader::read() {
+	if (inputExhausted) throw std::exception("There's nothing more in the input.");
+	// I can't add a capture to the lambda, so instead I'm putting the handle in a global variable. It's not like we have more than one instance of this thing.
+	__temp_hFile = this->hFile;
+	return __input_reader_util_parse_ulonglong(this, [](PTCHAR pChar, PDWORD pTemp) -> bool {
+		return ReadFile(__temp_hFile, pChar, 1, pTemp, NULL);
+	});
 }
 
 unsigned long long int ConsoleInputReader::read() {
 	if (inputExhausted) throw std::exception("There's nothing more in the input.");
-	TCHAR currChar = '\0';
-	DWORD temp = 0;
-	unsigned long long int result = 0;
-	do {
-		if (!ReadConsole(this->stdOutput, &currChar, 1, &temp, NULL)) {
-			if (GetLastError() != ERROR_HANDLE_EOF) abort();
-			temp = 0;
-		}
-		if (temp == 0) {
-			inputExhausted = true;
-			break;
-		}
-		result *= 10;
-		result += currChar - TEXT('0');
-	} while (currChar >= TEXT('0') && currChar <= TEXT('9'));
-	return result;
+	return __input_reader_util_parse_ulonglong(this, [](TCHAR* pChar, PDWORD _temp)->bool {
+		return ReadConsole(console.input, pChar, 1, _temp, NULL);
+	});
 }
 
 unsigned long long int TestInputReader::read() {
