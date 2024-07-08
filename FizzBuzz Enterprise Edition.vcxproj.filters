@@ -25,12 +25,18 @@
     <ClCompile Include="console.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="argparser.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cpp_tstring.hpp">
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="console.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="argparser.hpp">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

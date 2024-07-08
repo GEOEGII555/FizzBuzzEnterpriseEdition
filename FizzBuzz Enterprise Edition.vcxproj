@@ -127,10 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="argparser.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="argparser.hpp" />
     <ClInclude Include="console.hpp" />
     <ClInclude Include="cpp_tstring.hpp" />
   </ItemGroup>
