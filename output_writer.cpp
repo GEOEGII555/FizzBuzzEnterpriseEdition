@@ -34,7 +34,7 @@ void ConsoleOutputWriter::_write(tstring str) {
 }
 
 FileOutputWriter::FileOutputWriter(tstring file) {
-	this->hFile = CreateFile(file.c_str(), GENERIC_WRITE, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	this->hFile = CreateFile(file.c_str(), FILE_APPEND_DATA, NULL, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (GetLastError() != NO_ERROR && GetLastError() != ERROR_ALREADY_EXISTS) {
 		DWORD error = GetLastError();
 		TCHAR* arr;
@@ -47,7 +47,10 @@ FileOutputWriter::FileOutputWriter(tstring file) {
 }
 
 void FileOutputWriter::_write(tstring str) {
+	// TODO: Broken.
 	DWORD dataWritten;
-	WriteFile(this->hFile, str.c_str(), str.length(), &dataWritten, NULL);
-	if (dataWritten != str.length()) abort();
+	SetFilePointer(hFile, 0, NULL, FILE_END);
+	const TCHAR* c_str = str.c_str();
+	WriteFile(this->hFile, c_str, str.length() * sizeof(TCHAR), &dataWritten, NULL);
+	if (dataWritten != str.length() * sizeof(TCHAR)) abort();
 }
