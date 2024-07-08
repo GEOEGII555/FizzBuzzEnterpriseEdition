@@ -397,5 +397,6 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-# Project-specific: test.txt for testing file output
+# Project-specific: test.txt for testing file output, cache.txt for the test cache
 test.txt
+cache.txt

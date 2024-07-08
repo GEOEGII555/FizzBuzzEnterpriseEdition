@@ -58,8 +58,8 @@ int _tmain(unsigned int argc, TCHAR* argv[]) {
 		cacheLoader->dumpCache(fizzbuzzer.cache);
 	}
 
-	delete[] cacheLoader;
-	delete[] outputWriter;
-	delete[] inputReader;
+	delete cacheLoader;
+	delete outputWriter;
+	delete inputReader;
 	return 0;
 }
