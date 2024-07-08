@@ -9,6 +9,9 @@
 struct BaseInputReader {
 	bool inputExhausted = false;
 
+	virtual bool getIsInputExhausted() {
+		return this->inputExhausted;
+	}
 	virtual unsigned long long int read() = 0;
 	virtual std::vector<unsigned long long int> readRemainingInput();
 };
@@ -19,6 +22,7 @@ struct FileInputReader : BaseInputReader {
 	FileInputReader(tstring file);
 
 	virtual unsigned long long int read();
+	virtual bool getIsInputExhausted();
 };
 
 struct ConsoleInputReader : BaseInputReader {
@@ -27,9 +31,11 @@ struct ConsoleInputReader : BaseInputReader {
 	ConsoleInputReader() : stdOutput(GetStdHandle(STD_OUTPUT_HANDLE)) {};
 
 	virtual unsigned long long int read();
+	virtual bool getIsInputExhausted();
 };
 
 struct TestInputReader : BaseInputReader {
 	unsigned long long int i = 1;
 	virtual unsigned long long int read();
+	virtual bool getIsInputExhausted();
 };

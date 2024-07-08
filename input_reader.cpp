@@ -74,3 +74,13 @@ unsigned long long int TestInputReader::read() {
 	if (i == 100) inputExhausted = true;
 	return i++;
 }
+
+bool TestInputReader::getIsInputExhausted() {
+	return this->inputExhausted;
+}
+bool FileInputReader::getIsInputExhausted() {
+	return this->inputExhausted;
+}
+bool ConsoleInputReader::getIsInputExhausted() {
+	return this->inputExhausted;
+}

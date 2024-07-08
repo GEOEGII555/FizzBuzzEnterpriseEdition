@@ -36,7 +36,7 @@ int _tmain(unsigned int argc, TCHAR* argv[]) {
 	else {
 		outputWriter = new ConsoleOutputWriter();
 	}
-	while (!inputReader->inputExhausted) {
+	while (!inputReader->getIsInputExhausted()) {
 		try {
 			unsigned long long int value = inputReader->read();
 			outputWriter->writeOne(value, fizzbuzzer.fizzBuzz(value));
