@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="argparser.cpp" />
     <ClCompile Include="console.cpp" />
+    <ClCompile Include="fizz_buzz.cpp" />
     <ClCompile Include="input_reader.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -136,6 +137,7 @@
     <ClInclude Include="argparser.hpp" />
     <ClInclude Include="console.hpp" />
     <ClInclude Include="cpp_tstring.hpp" />
+    <ClInclude Include="fizz_buzz.hpp" />
     <ClInclude Include="input_reader.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
