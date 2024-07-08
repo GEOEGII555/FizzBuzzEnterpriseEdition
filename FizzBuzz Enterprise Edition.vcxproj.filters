@@ -28,6 +28,9 @@
     <ClCompile Include="argparser.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="input_reader.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cpp_tstring.hpp">
@@ -37,6 +40,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="argparser.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="input_reader.hpp">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>
