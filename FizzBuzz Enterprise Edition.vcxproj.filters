@@ -58,4 +58,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md">
+      <Filter>Markdown files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
