@@ -34,6 +34,9 @@
     <ClCompile Include="fizz_buzz.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="output_writer.cpp">
+      <Filter>Header files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cpp_tstring.hpp">
@@ -49,6 +52,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="fizz_buzz.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="output_writer.hpp">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 #include <tchar.h>
 #include "console.hpp"
 #include "argparser.hpp"
+#include "output_writer.hpp"
 #include "input_reader.hpp"
 
 // Welcome to 2024, where open source projects have a copyright.
@@ -11,6 +12,7 @@ TCHAR copyrightMessage[] = {
 
 ArgumentParser argParser;
 BaseInputReader* inputReader;
+BaseOutputWriter* outputWriter;
 
 int _tmain(unsigned int argc, TCHAR* argv[]) {
 	argParser.parse(argc, argv);

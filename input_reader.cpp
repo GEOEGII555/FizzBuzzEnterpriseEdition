@@ -14,8 +14,8 @@ std::vector<unsigned long long int> BaseInputReader::readRemainingInput() {
 }
 
 FileInputReader::FileInputReader(tstring file) {
-	this->hFile = CreateFile(file.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-	if (GetLastError() != NO_ERROR && GetLastError() != ERROR_ALREADY_EXISTS) {
+	this->hFile = CreateFile(file.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (GetLastError() != NO_ERROR) {
 		DWORD error = GetLastError();
 		TCHAR* arr;
 		if (!FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, NULL, error, LANG_USER_DEFAULT, reinterpret_cast<LPTSTR>(&arr), 1, NULL)) abort();

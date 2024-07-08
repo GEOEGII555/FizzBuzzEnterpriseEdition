@@ -19,3 +19,17 @@ FizzBuzzResult _FizzBuzzer::fizzBuzz(const unsigned long long int number) {
 }
 
 _FizzBuzzer fizzbuzzer = {};
+
+FizzBuzzResult operator|(FizzBuzzResult lhs, FizzBuzzResult rhs) {
+	return static_cast<FizzBuzzResult>(
+		static_cast<std::underlying_type<FizzBuzzResult>::type>(lhs) |
+		static_cast<std::underlying_type<FizzBuzzResult>::type>(rhs)
+		);
+}
+
+FizzBuzzResult operator&(FizzBuzzResult lhs, FizzBuzzResult rhs) {
+	return static_cast<FizzBuzzResult>(
+		static_cast<std::underlying_type<FizzBuzzResult>::type>(lhs) &
+		static_cast<std::underlying_type<FizzBuzzResult>::type>(rhs)
+		);
+}

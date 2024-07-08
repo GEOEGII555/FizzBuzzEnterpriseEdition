@@ -13,3 +13,6 @@ struct _FizzBuzzer {
 };
 
 extern _FizzBuzzer fizzbuzzer;
+
+FizzBuzzResult operator|(FizzBuzzResult lhs, FizzBuzzResult rhs);
+FizzBuzzResult operator&(FizzBuzzResult lhs, FizzBuzzResult rhs);

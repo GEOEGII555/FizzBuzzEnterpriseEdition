@@ -132,6 +132,7 @@
     <ClCompile Include="fizz_buzz.cpp" />
     <ClCompile Include="input_reader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="output_writer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="argparser.hpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="cpp_tstring.hpp" />
     <ClInclude Include="fizz_buzz.hpp" />
     <ClInclude Include="input_reader.hpp" />
+    <ClInclude Include="output_writer.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
