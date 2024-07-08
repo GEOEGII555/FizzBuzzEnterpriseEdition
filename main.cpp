@@ -37,8 +37,13 @@ int _tmain(unsigned int argc, TCHAR* argv[]) {
 		outputWriter = new ConsoleOutputWriter();
 	}
 	while (!inputReader->inputExhausted) {
-		unsigned long long int value = inputReader->read();
-		outputWriter->writeOne(value, fizzbuzzer.fizzBuzz(value));
+		try {
+			unsigned long long int value = inputReader->read();
+			outputWriter->writeOne(value, fizzbuzzer.fizzBuzz(value));
+		}
+		catch (std::exception e) { // Just in case something goes wrong (is the input stream empty?).
+			continue;
+		}
 	}
 	return 0;
 }

@@ -24,6 +24,9 @@ FileInputReader::FileInputReader(tstring file) {
 		console.writeError(TEXT("\n"));
 		abort();
 	}
+	DWORD fileSize;
+	GetFileSize(this->hFile, &fileSize);
+	if (fileSize == 0) inputExhausted = true;
 }
 
 unsigned long long int FileInputReader::read() {
