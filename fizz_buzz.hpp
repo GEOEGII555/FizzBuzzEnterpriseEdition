@@ -15,7 +15,7 @@ struct _FizzBuzzer {
 	FizzBuzzResult fizzBuzz(const unsigned long long int number);
 };
 
-extern _FizzBuzzer fizzbuzzer;
+inline _FizzBuzzer fizzbuzzer;
 
 FizzBuzzResult operator|(FizzBuzzResult lhs, FizzBuzzResult rhs);
 FizzBuzzResult operator&(FizzBuzzResult lhs, FizzBuzzResult rhs);
