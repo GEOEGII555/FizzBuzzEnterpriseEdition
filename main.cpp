@@ -18,29 +18,29 @@ FizzBuzzCacheLoader* cacheLoader;
 
 int _tmain(unsigned int argc, TCHAR* argv[]) {
 	argParser.parse(argc, argv);
-	if (!argParser.noSplash) console.writeOutput(copyrightMessage);
-	if (argParser.showHelp) {
+	if (argParser.shouldShowSplash()) console.writeOutput(copyrightMessage);
+	if (argParser.shouldShowHelp()) {
 		console.writeOutput(helpMessage);
 		return -1;
 	}
-	if (argParser.useTestInput) {
+	if (argParser.shouldUseTestInput()) {
 		inputReader = new TestInputReader();
 	}
-	else if (argParser.inputFile == TEXT("")) {
+	else if (argParser.getInputFile() == TEXT("")) {
 		inputReader = new ConsoleInputReader();
 	}
 	else {
-		inputReader = new FileInputReader(argParser.inputFile);
+		inputReader = new FileInputReader(argParser.getInputFile());
 	}
-	if (argParser.outputFilename != TEXT("")) {
-		outputWriter = new FileOutputWriter(argParser.outputFilename);
+	if (argParser.getOutputFilename() != TEXT("")) {
+		outputWriter = new FileOutputWriter(argParser.getOutputFilename());
 	}
 	else {
 		outputWriter = new ConsoleOutputWriter();
 	}
 
-	if (argParser.cacheFile != TEXT("")) {
-		cacheLoader = new FizzBuzzCacheLoader(argParser.cacheFile);
+	if (argParser.getCacheFile() != TEXT("")) {
+		cacheLoader = new FizzBuzzCacheLoader(argParser.getCacheFile());
 		cacheLoader->loadCache(fizzbuzzer.cache);
 	}
 
@@ -54,7 +54,7 @@ int _tmain(unsigned int argc, TCHAR* argv[]) {
 		}
 	}
 
-	if (argParser.cacheFile != TEXT("")) {
+	if (argParser.getCacheFile() != TEXT("")) {
 		cacheLoader->dumpCache(fizzbuzzer.cache);
 	}
 

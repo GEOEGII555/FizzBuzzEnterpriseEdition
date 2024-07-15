@@ -88,3 +88,39 @@ void ArgumentParser::parse(const unsigned int argc, const TCHAR* const argv[]) {
 	}
 	if (!inputSourceSpecified) showHelp = true;
 }
+bool ArgumentParser::shouldShowHelp() {
+	return this->showHelp;
+}
+tstring ArgumentParser::getOutputFilename() {
+	return this->outputFilename;
+}
+tstring ArgumentParser::getCacheFile() {
+	return this->cacheFile;
+}
+tstring ArgumentParser::getInputFile() {
+	return this->inputFile;
+}
+bool ArgumentParser::isInputSourceSpecified() {
+	return this->inputSourceSpecified;
+}
+bool ArgumentParser::shouldShowSplash() {
+	return !this->noSplash;
+}
+bool ArgumentParser::shouldUseTestInput() {
+	return this->useTestInput;
+}
+
+bool ArgumentParser::getBooleanFlag(tstring flag) {
+	if (flag == TEXT("showHelp")) return this->shouldShowHelp();
+	if (flag == TEXT("inputSourceSpecified")) return this->isInputSourceSpecified();
+	if (flag == TEXT("noSplash")) return !this->shouldShowSplash();
+	if (flag == TEXT("useTestInput")) return this->shouldUseTestInput();
+	abort();
+}
+
+tstring ArgumentParser::getStringArgument(tstring argument) {
+	if (argument == TEXT("outputFilename")) return this->getOutputFilename();
+	if (argument == TEXT("cacheFile")) return this->getCacheFile();
+	if (argument == TEXT("inputFile")) return this->getInputFile();
+	abort();
+}
