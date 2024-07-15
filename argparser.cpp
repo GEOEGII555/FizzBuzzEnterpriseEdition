@@ -1,6 +1,8 @@
 #include <Windows.h>
 #include <tchar.h>
 #include "cpp_tstring.hpp"
+#include <iterator>
+#include <vector>
 #include "argparser.hpp"
 
 TCHAR helpMessage[] = TEXT("Usage: [program] [--output file] [--enable_cache cache_file] [--source source]\n\
@@ -21,59 +23,60 @@ constexpr TCHAR INPUT_SOURCE_FLAG[] = TEXT("--input_source");
 constexpr TCHAR INPUT_SOURCE_STDINPUT[] = TEXT("stdinput");
 constexpr TCHAR INPUT_SOURCE_FILE[] = TEXT("file");
 constexpr TCHAR INPUT_SOURCE_TESTINPUT[] = TEXT("testinput");
-constexpr TCHAR NO_SPLASH_FLAG[] = TEXT("--no-spplash");
+constexpr TCHAR NO_SPLASH_FLAG[] = TEXT("--no-splash");
 
 void ArgumentParser::parse(const unsigned int argc, const TCHAR* const argv[]) {
-	unsigned int i = 0;
-	while (i < argc) {
-		if (lstrcmp(argv[i], HELP_FLAG) == 0) showHelp = true;
-		else if (lstrcmp(argv[i], OUTPUT_FILENAME_FLAG) == 0) {
-			i++;
-			if (i >= argc) {
+	std::vector argvVector(argv, argv + argc);
+	auto it = argvVector.begin();
+	while (it < argvVector.end()) {
+		if (lstrcmp(*it, HELP_FLAG) == 0) showHelp = true;
+		else if (lstrcmp(*it, OUTPUT_FILENAME_FLAG) == 0) {
+			std::advance(it, 1);
+			if (it >= argvVector.end()) {
 				showHelp = true;
 				break;
 			}
-			this->outputFilename = argv[i];
+			this->outputFilename = *it;
 			if (this->outputFilename == TEXT("")) {
 				showHelp = true;
 				break;
 			}
 		}
-		else if (lstrcmp(argv[i], ENABLE_CACHE_FLAG) == 0) {
-			i++;
-			if (i >= argc) {
+		else if (lstrcmp(*it, ENABLE_CACHE_FLAG) == 0) {
+			std::advance(it, 1);
+			if (it >= argvVector.end()) {
 				showHelp = true;
 				break;
 			}
-			this->cacheFile = argv[i];
+			this->cacheFile = *it;
 			if (this->cacheFile == TEXT("")) {
 				showHelp = true;
 				break;
 			}
 		}
-		else if (lstrcmp(argv[i], INPUT_SOURCE_FLAG) == 0) {
+		else if (lstrcmp(*it, INPUT_SOURCE_FLAG) == 0) {
 			inputSourceSpecified = true;
-			i++;
-			if (i >= argc) {
+			std::advance(it, 1);
+			if (it >= argvVector.end()) {
 				showHelp = true;
 				break;
 			}
-			if (lstrcmp(argv[i], INPUT_SOURCE_STDINPUT) == 0) {
+			if (lstrcmp(*it, INPUT_SOURCE_STDINPUT) == 0) {
 				this->inputFile = TEXT("");
 			}
-			else if (lstrcmp(argv[i], INPUT_SOURCE_FILE) == 0) {
-				i++;
-				if (i >= argc) {
+			else if (lstrcmp(*it, INPUT_SOURCE_FILE) == 0) {
+				std::advance(it, 1);
+				if (it >= argvVector.end()) {
 					showHelp = true;
 					break;
 				}
-				this->inputFile = argv[i];
+				this->inputFile = *it;
 				if (this->inputFile == TEXT("")) {
 					showHelp = true;
 					break;
 				}
 			}
-			else if (lstrcmp(argv[i], INPUT_SOURCE_TESTINPUT) == 0) {
+			else if (lstrcmp(*it, INPUT_SOURCE_TESTINPUT) == 0) {
 				this->useTestInput = true;
 			}
 			else {
@@ -81,10 +84,10 @@ void ArgumentParser::parse(const unsigned int argc, const TCHAR* const argv[]) {
 				break;
 			}
 		}
-		else if (lstrcmp(argv[i], NO_SPLASH_FLAG) == 0) {
+		else if (lstrcmp(*it, NO_SPLASH_FLAG) == 0) {
 			this->noSplash = true;
 		}
-		i++;
+		std::advance(it, 1);
 	}
 	if (!inputSourceSpecified) showHelp = true;
 }

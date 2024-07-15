@@ -18,8 +18,8 @@ void BaseOutputWriter::writeOne(unsigned long long int number, FizzBuzzResult re
 	tstring _result = str.str();
 	std::reverse(_result.begin(), _result.end());
 	str.clear();
-	str << _result;
-	str << TEXT(":");
+	str.str(TEXT(""));
+	str << _result << TEXT(":");
 	if ((result & FizzBuzzResult::NONE) != FizzBuzzResult::UNKNOWN) str << _result;
 	else str << result;
 	str << TEXT('\n');
