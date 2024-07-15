@@ -13,11 +13,21 @@ TCHAR helpMessage[] = TEXT("Usage: [program] [--output file] [--enable_cache cac
 \t\tfile filename.txt - A file. If you set the source to file, you need to specify the filename right after the source argument.\n\
 \t\ttestinput - A fake input source. It inputs all numbers from 1 to 100 (both sides included).\n");
 
+// See the help message above for more info about these flags.
+constexpr TCHAR HELP_FLAG[] = TEXT("--help");
+constexpr TCHAR OUTPUT_FILENAME_FLAG[] = TEXT("--output");
+constexpr TCHAR ENABLE_CACHE_FLAG[] = TEXT("--enable_cache");
+constexpr TCHAR INPUT_SOURCE_FLAG[] = TEXT("--input_source");
+constexpr TCHAR INPUT_SOURCE_STDINPUT[] = TEXT("stdinput");
+constexpr TCHAR INPUT_SOURCE_FILE[] = TEXT("file");
+constexpr TCHAR INPUT_SOURCE_TESTINPUT[] = TEXT("testinput");
+constexpr TCHAR NO_SPLASH_FLAG[] = TEXT("--no-spplash");
+
 void ArgumentParser::parse(const unsigned int argc, const TCHAR* const argv[]) {
 	unsigned int i = 0;
 	while (i < argc) {
-		if (lstrcmp(argv[i], TEXT("--help")) == 0) showHelp = true;
-		else if (lstrcmp(argv[i], TEXT("--output")) == 0) {
+		if (lstrcmp(argv[i], HELP_FLAG) == 0) showHelp = true;
+		else if (lstrcmp(argv[i], OUTPUT_FILENAME_FLAG) == 0) {
 			i++;
 			if (i >= argc) {
 				showHelp = true;
@@ -29,7 +39,7 @@ void ArgumentParser::parse(const unsigned int argc, const TCHAR* const argv[]) {
 				break;
 			}
 		}
-		else if (lstrcmp(argv[i], TEXT("--enable_cache")) == 0) {
+		else if (lstrcmp(argv[i], ENABLE_CACHE_FLAG) == 0) {
 			i++;
 			if (i >= argc) {
 				showHelp = true;
@@ -41,17 +51,17 @@ void ArgumentParser::parse(const unsigned int argc, const TCHAR* const argv[]) {
 				break;
 			}
 		}
-		else if (lstrcmp(argv[i], TEXT("--input_source")) == 0) {
+		else if (lstrcmp(argv[i], INPUT_SOURCE_FLAG) == 0) {
 			inputSourceSpecified = true;
 			i++;
 			if (i >= argc) {
 				showHelp = true;
 				break;
 			}
-			if (lstrcmp(argv[i], TEXT("stdinput")) == 0) {
+			if (lstrcmp(argv[i], INPUT_SOURCE_STDINPUT) == 0) {
 				this->inputFile = TEXT("");
 			}
-			else if (lstrcmp(argv[i], TEXT("file")) == 0) {
+			else if (lstrcmp(argv[i], INPUT_SOURCE_FILE) == 0) {
 				i++;
 				if (i >= argc) {
 					showHelp = true;
@@ -63,7 +73,7 @@ void ArgumentParser::parse(const unsigned int argc, const TCHAR* const argv[]) {
 					break;
 				}
 			}
-			else if (lstrcmp(argv[i], TEXT("testinput")) == 0) {
+			else if (lstrcmp(argv[i], INPUT_SOURCE_TESTINPUT) == 0) {
 				this->useTestInput = true;
 			}
 			else {
@@ -71,7 +81,7 @@ void ArgumentParser::parse(const unsigned int argc, const TCHAR* const argv[]) {
 				break;
 			}
 		}
-		else if (lstrcmp(argv[i], TEXT("--no-splash")) == 0) {
+		else if (lstrcmp(argv[i], NO_SPLASH_FLAG) == 0) {
 			this->noSplash = true;
 		}
 		i++;
