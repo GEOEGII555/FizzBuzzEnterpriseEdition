@@ -12,11 +12,11 @@ struct _console {
 	_console();
 
 	void writeOutput(const TCHAR str[]);
-
+	void writeOutput(const tstring&& str);
 	void writeOutput(const tstring str);
 
 	void writeError(const TCHAR str[]);
-
+	void writeError(const tstring&& str);
 	void writeError(const tstring str);
 
 	DWORD readFixedSizeInput(TCHAR* str, const DWORD size, const PCONSOLE_READCONSOLE_CONTROL const pReadConsoleControl = NULL);

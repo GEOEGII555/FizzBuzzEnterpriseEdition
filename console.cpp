@@ -14,7 +14,9 @@ _console::_console() {
 void _console::writeOutput(const TCHAR str[]) {
 	WriteConsole(this->output, str, lstrlen(str), NULL, NULL);
 }
-
+void _console::writeOutput(const tstring&& str) {
+	writeOutput(str.c_str());
+}
 void _console::writeOutput(const tstring str) {
 	writeOutput(str.c_str());
 }
@@ -22,7 +24,9 @@ void _console::writeOutput(const tstring str) {
 void _console::writeError(const TCHAR str[]) {
 	WriteConsole(this->error, str, lstrlen(str), NULL, NULL);
 }
-
+void _console::writeError(const tstring&& str) {
+	writeError(str.c_str());
+}
 void _console::writeError(const tstring str) {
 	writeError(str.c_str());
 }
