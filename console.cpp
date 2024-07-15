@@ -2,6 +2,8 @@
 #include <tchar.h>
 #include "console.hpp"
 #include "cpp_tstring.hpp"
+#include <algorithm>
+#include <ranges>
 
 _console::_console() {
 	this->output = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -26,7 +28,9 @@ void _console::writeError(const tstring str) {
 }
 
 DWORD _console::readFixedSizeInput(TCHAR* str, const DWORD size, const PCONSOLE_READCONSOLE_CONTROL const pReadConsoleControl) {
-	for (size_t i = 0; i < size; i++) str[i] = 0;
+	std::ranges::for_each(std::views::iota(static_cast<DWORD>(0), size), [&](std::size_t i) {
+		str[i] = 0;
+	});
 	DWORD length;
 	if (!ReadConsole(this->input, str, size, &length, pReadConsoleControl)) abort();
 	return length;
