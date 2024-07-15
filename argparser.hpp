@@ -4,7 +4,22 @@
 
 extern TCHAR helpMessage[];
 
-class ArgumentParser {
+interface IArgumentParserGetters {
+	virtual bool shouldShowHelp() = 0;
+	virtual tstring getOutputFilename() = 0;
+	virtual tstring getCacheFile() = 0;
+	virtual tstring getInputFile() = 0;
+	virtual bool isInputSourceSpecified() = 0;
+	virtual bool shouldShowSplash() = 0;
+	virtual bool shouldUseTestInput() = 0;
+};
+
+interface IArgumentParserBigGetter {
+	virtual bool getBooleanFlag(tstring flag) = 0;
+	virtual tstring getStringArgument(tstring argument) = 0;
+};
+
+class ArgumentParser: public IArgumentParserGetters, public IArgumentParserBigGetter {
 	bool showHelp = false;
 	tstring outputFilename = TEXT("");
 	tstring cacheFile = TEXT("");
@@ -15,14 +30,15 @@ class ArgumentParser {
 
 public:
 	void parse(const unsigned int argc, const TCHAR* const argv[]);
-	bool shouldShowHelp();
-	tstring getOutputFilename();
-	tstring getCacheFile();
-	tstring getInputFile();
-	bool isInputSourceSpecified();
-	bool shouldShowSplash();
-	bool shouldUseTestInput();
-	
-	bool getBooleanFlag(tstring flag);
-	tstring getStringArgument(tstring argument);
+
+	virtual bool shouldShowHelp();
+	virtual tstring getOutputFilename();
+	virtual tstring getCacheFile();
+	virtual tstring getInputFile();
+	virtual bool isInputSourceSpecified();
+	virtual bool shouldShowSplash();
+	virtual bool shouldUseTestInput();
+
+	virtual bool getBooleanFlag(tstring flag);
+	virtual tstring getStringArgument(tstring argument);
 };
