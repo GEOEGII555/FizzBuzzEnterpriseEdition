@@ -6,21 +6,24 @@
 #include "console.hpp"
 #include <tchar.h>
 #include <algorithm>
+#include "cpp_tstring.hpp"
 
 void BaseOutputWriter::writeOne(unsigned long long int number, FizzBuzzResult result) {
-	tstring str;
-	if (number == 0) str = TEXT("0");
+	tostringstream str;
+	if (number == 0) str << TEXT("0");
 	else while (number != 0) {
-		str.push_back((TCHAR)((number % 10) + TEXT('0')));
+		str << (TCHAR)((number % 10) + TEXT('0'));
 		number /= 10;
 	}
-	std::reverse(str.begin(), str.end());
-	str.append(TEXT(":"));
-	if ((result & FizzBuzzResult::FIZZ) != FizzBuzzResult::UNKNOWN) str.append(TEXT("Fizz"));
-	if ((result & FizzBuzzResult::BUZZ) != FizzBuzzResult::UNKNOWN) str.append(TEXT("Buzz"));
-	if ((result & FizzBuzzResult::NONE) != FizzBuzzResult::UNKNOWN) str.append(str.substr(0, str.length() - 1));
-	str.push_back('\n');
-	_write(str);
+	tstring _result = str.str();
+	std::reverse(_result.begin(), _result.end());
+	str.clear();
+	str << _result;
+	str << TEXT(":");
+	if ((result & FizzBuzzResult::NONE) != FizzBuzzResult::UNKNOWN) str << _result;
+	else str << result;
+	str << TEXT('\n');
+	_write(str.str());
 }
 
 void BaseOutputWriter::writeMany(std::vector<std::pair<unsigned long long int, FizzBuzzResult>> values) {

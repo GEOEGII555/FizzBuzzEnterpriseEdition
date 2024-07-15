@@ -33,3 +33,10 @@ FizzBuzzResult operator&(FizzBuzzResult lhs, FizzBuzzResult rhs) {
 		static_cast<std::underlying_type<FizzBuzzResult>::type>(rhs)
 		);
 }
+
+tostringstream& operator<<(tostringstream& ostream, FizzBuzzResult const& fizzBuzzResult) {
+	if ((fizzBuzzResult & FizzBuzzResult::FIZZ) != FizzBuzzResult::UNKNOWN) ostream << TEXT("Fizz");
+	if ((fizzBuzzResult & FizzBuzzResult::BUZZ) != FizzBuzzResult::UNKNOWN) ostream << TEXT("Buzz");
+	// if ((fizzBuzzResult & FizzBuzzResult::FIZZ) != FizzBuzzResult::UNKNOWN) ostream << ostream.str().substr(0, ostream.str().find_first_of(TEXT(':')));
+	return ostream;
+}
