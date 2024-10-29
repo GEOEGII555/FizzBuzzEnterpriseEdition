@@ -3,7 +3,10 @@ Welcome to FizzBuzz Enterprise Edition by Quality Enterprise Coding Co LTD. - th
 
 Our top priority is performance, code architecture and ease of use. This is why we wrote our product in C++, and never used Java (don't look at the Git commit history, no, don't do it!).
 
-The usage is simple:
+## System Requirements
+At least Microsoft(R) Windows(R) Server(R) 2022 or Microsoft(R) Windows (R) 11 24H2. 2 TiB of RAM and 2 PiB of disk space required.
+
+You will need an AMD Ryzen Threadripper PRO 7995WX. For optimal usage of the program, installing 16 of (AMD Ryzen Threadripper PRO 7995WX) is recommended.
 
 ## Usage
 Run the executable without any arguments to see the help menu. (figure it out yourself, it's very easy).
