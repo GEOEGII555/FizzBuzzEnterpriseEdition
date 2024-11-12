@@ -29,7 +29,10 @@ void ArgumentParser::parse(const unsigned int argc, const TCHAR* const argv[]) {
 	std::vector argvVector(argv, argv + argc);
 	auto it = argvVector.begin();
 	while (it < argvVector.end()) {
-		if (lstrcmp(*it, HELP_FLAG) == 0) showHelp = true;
+		if (lstrcmp(*it, HELP_FLAG) == 0) {
+			showHelp = true;
+			explicitHelp = true;
+		}
 		else if (lstrcmp(*it, OUTPUT_FILENAME_FLAG) == 0) {
 			std::advance(it, 1);
 			if (it >= argvVector.end()) {
