@@ -29,7 +29,7 @@ FileInputReader::FileInputReader(tstring file) {
 		DWORD error = GetLastError();
 		TCHAR* arr;
 		if (!FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, NULL, error, LANG_USER_DEFAULT, reinterpret_cast<LPTSTR>(&arr), 1, NULL)) abort();
-		console.writeError(TEXT("Failed to open the input file for reading: "));
+		console.writeError(TEXT("Failed to get the input file size: "));
 		console.writeError(arr);
 		console.writeError(TEXT("\n"));
 		abort();
