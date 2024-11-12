@@ -5,7 +5,7 @@
 #include <vector>
 #include "argparser.hpp"
 
-TCHAR helpMessage[] = TEXT("Usage: [program] [--output file] [--enable_cache cache_file] [--source source]\n\
+static constexpr TCHAR helpMessage[] = TEXT("Usage: [program] [--output file] [--enable_cache cache_file] [--source source]\n\
 \t--no-splash - Don't show the FizzBuzz Enterprise Edition splash message.\n\
 \t--help - Display this help message, even if the input source is configured properly.\n\
 \t--output [file] - Specify the file to write the result to. If this argument is omitted, the result is written into the standard output\n\
