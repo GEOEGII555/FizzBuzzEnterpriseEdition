@@ -6,6 +6,7 @@ extern TCHAR helpMessage[];
 
 interface IArgumentParserGetters {
 	virtual bool shouldShowHelp() = 0;
+	virtual bool isExplicitHelp() = 0;
 	virtual tstring getOutputFilename() = 0;
 	virtual tstring getCacheFile() = 0;
 	virtual tstring getInputFile() = 0;
@@ -21,6 +22,7 @@ interface IArgumentParserBigGetter {
 
 class ArgumentParser: public IArgumentParserGetters, public IArgumentParserBigGetter {
 	bool showHelp = false;
+	bool explicitHelp = false;
 	tstring outputFilename = TEXT("");
 	tstring cacheFile = TEXT("");
 	tstring inputFile = TEXT("");
@@ -32,6 +34,7 @@ public:
 	void parse(const unsigned int argc, const TCHAR* const argv[]);
 
 	virtual bool shouldShowHelp();
+	virtual bool isExplicitHelp();
 	virtual tstring getOutputFilename();
 	virtual tstring getCacheFile();
 	virtual tstring getInputFile();
