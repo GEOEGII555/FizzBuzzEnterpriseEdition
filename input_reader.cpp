@@ -40,7 +40,6 @@ unsigned long long int __input_reader_util_parse_ulonglong(BaseInputReader* _thi
 	if (temp == 0) {
 		_this->inputExhausted = true;
 		throw std::exception("There's nothing more in the input.");
-		return -1;
 	}
 	bool isFirstChar = true;
 	bool negative = false; // We need to read the rest of the number before throwing an exception to avoid leaving parts of a number in the buffer.
