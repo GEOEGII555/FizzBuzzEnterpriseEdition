@@ -16,14 +16,14 @@ static constexpr TCHAR helpMessage[] = TEXT("Usage: [program] [--output file] [-
 \t\ttestinput - A fake input source. It inputs all numbers from 1 to 100 (both sides included).\n");
 
 // See the help message above for more info about these flags.
-constexpr TCHAR HELP_FLAG[] = TEXT("--help");
-constexpr TCHAR OUTPUT_FILENAME_FLAG[] = TEXT("--output");
-constexpr TCHAR ENABLE_CACHE_FLAG[] = TEXT("--enable_cache");
-constexpr TCHAR INPUT_SOURCE_FLAG[] = TEXT("--input_source");
-constexpr TCHAR INPUT_SOURCE_STDINPUT[] = TEXT("stdinput");
-constexpr TCHAR INPUT_SOURCE_FILE[] = TEXT("file");
-constexpr TCHAR INPUT_SOURCE_TESTINPUT[] = TEXT("testinput");
-constexpr TCHAR NO_SPLASH_FLAG[] = TEXT("--no-splash");
+static constexpr TCHAR HELP_FLAG[] = TEXT("--help");
+static constexpr TCHAR OUTPUT_FILENAME_FLAG[] = TEXT("--output");
+static constexpr TCHAR ENABLE_CACHE_FLAG[] = TEXT("--enable_cache");
+static constexpr TCHAR INPUT_SOURCE_FLAG[] = TEXT("--input_source");
+static constexpr TCHAR INPUT_SOURCE_STDINPUT[] = TEXT("stdinput");
+static constexpr TCHAR INPUT_SOURCE_FILE[] = TEXT("file");
+static constexpr TCHAR INPUT_SOURCE_TESTINPUT[] = TEXT("testinput");
+static constexpr TCHAR NO_SPLASH_FLAG[] = TEXT("--no-splash");
 
 void ArgumentParser::parse(const unsigned int argc, const TCHAR* const argv[]) {
 	std::vector argvVector(argv, argv + argc);
