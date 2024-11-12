@@ -25,7 +25,15 @@ FileInputReader::FileInputReader(tstring file) {
 		abort();
 	}
 	unsigned long long int fileSize;
-	GetFileSizeEx(this->hFile, (PLARGE_INTEGER) & fileSize);
+	if (!GetFileSizeEx(this->hFile, (PLARGE_INTEGER) & fileSize)) {
+		DWORD error = GetLastError();
+		TCHAR* arr;
+		if (!FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM, NULL, error, LANG_USER_DEFAULT, reinterpret_cast<LPTSTR>(&arr), 1, NULL)) abort();
+		console.writeError(TEXT("Failed to open the input file for reading: "));
+		console.writeError(arr);
+		console.writeError(TEXT("\n"));
+		abort();
+	}
 	if (fileSize == 0) inputExhausted = true;
 }
 
