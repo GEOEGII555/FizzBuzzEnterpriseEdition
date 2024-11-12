@@ -8,7 +8,7 @@
 
 // Welcome to 2024, where open source projects have a copyright.
 TCHAR copyrightMessage[] = {
-	TEXT("FizzBuzz Enterprise Edition.\nEnterpriseQualityCoding - the most serious and not satire or fake company in the uinverse.\n")
+	TEXT("FizzBuzz Enterprise Edition.\nEnterpriseQualityCoding - the most serious and not satire or fake company in the universe.\n")
 };
 
 ArgumentParser argParser;
@@ -21,7 +21,7 @@ int _tmain(unsigned int argc, TCHAR* argv[]) {
 	if (argParser.shouldShowSplash()) console.writeOutput(copyrightMessage);
 	if (argParser.shouldShowHelp()) {
 		console.writeOutput(helpMessage);
-		return -1;
+		return (argParser.isExplicitHelp()) ? 0 : -1;
 	}
 	if (argParser.shouldUseTestInput()) {
 		inputReader = new TestInputReader();
