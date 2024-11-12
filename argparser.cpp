@@ -97,6 +97,9 @@ void ArgumentParser::parse(const unsigned int argc, const TCHAR* const argv[]) {
 bool ArgumentParser::shouldShowHelp() {
 	return this->showHelp;
 }
+bool ArgumentParser::isExplicitHelp() {
+	return this->explicitHelp;
+}
 tstring ArgumentParser::getOutputFilename() {
 	return this->outputFilename;
 }
