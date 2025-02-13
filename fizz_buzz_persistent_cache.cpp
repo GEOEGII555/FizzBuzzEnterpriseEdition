@@ -69,9 +69,9 @@ void FizzBuzzCacheLoader::dumpCache(std::unordered_map<unsigned long long int, F
 		std::reverse(temp.begin(), temp.end());
 		line.append(temp);
 		line.push_back('\n');
-		DWORD realDataWritten = 0;
-		WriteFile(this->hFile, line.c_str(), line.size(), &realDataWritten, NULL);
-		if (realDataWritten != line.size()) abort();
+		DWORD dataWritten = 0;
+		WriteFile(this->hFile, line.c_str(), line.size(), &dataWritten, NULL);
+		if (dataWritten != line.size()) abort();
 		SetFilePointer(this->hFile, NULL, NULL, FILE_END);
 	});
 }
