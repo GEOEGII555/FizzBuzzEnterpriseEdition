@@ -26,12 +26,12 @@ void FizzBuzzCacheLoader::loadCache(std::unordered_map<unsigned long long int, F
 	unsigned long long int expectedSize;
 	GetFileSizeEx(this->hFile, (PLARGE_INTEGER)&expectedSize);
 	if (expectedSize > ((size_t)-1)) abort(); // (not possible under normal circumstances)
-	char* fileData = new char[expectedSize + 1];
-	ZeroMemory(fileData, sizeof(char) * (expectedSize + 1));
+	char* dataStoredInTheFile = new char[expectedSize + 1];
+	ZeroMemory(dataStoredInTheFile, sizeof(char) * (expectedSize + 1));
 	DWORD actualSize = 0;
-	if (!ReadFile(this->hFile, fileData, expectedSize, &actualSize, NULL)) abort();
+	if (!ReadFile(this->hFile, dataStoredInTheFile, expectedSize, &actualSize, NULL)) abort();
 	if (actualSize != expectedSize) abort();
-	std::string str(fileData);
+	std::string str(dataStoredInTheFile);
 	std::istringstream stream(str);
 	std::string line;
 	while (std::getline(stream, line, '\n')) {
