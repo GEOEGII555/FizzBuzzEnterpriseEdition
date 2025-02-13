@@ -23,14 +23,14 @@ FizzBuzzCacheLoader::FizzBuzzCacheLoader(tstring file) {
 
 void FizzBuzzCacheLoader::loadCache(std::unordered_map<unsigned long long int, FizzBuzzResult>& cache) {
 	cache.clear();
-	unsigned long long int size;
-	GetFileSizeEx(this->hFile, (PLARGE_INTEGER)&size);
-	if (size > ((size_t)-1)) abort(); // (not possible under normal circumstances)
-	char* fileData = new char[size + 1];
-	ZeroMemory(fileData, sizeof(char) * (size + 1));
-	DWORD realSize = 0;
-	if (!ReadFile(this->hFile, fileData, size, &realSize, NULL)) abort();
-	if (realSize != size) abort();
+	unsigned long long int expectedSize;
+	GetFileSizeEx(this->hFile, (PLARGE_INTEGER)&expectedSize);
+	if (expectedSize > ((size_t)-1)) abort(); // (not possible under normal circumstances)
+	char* fileData = new char[expectedSize + 1];
+	ZeroMemory(fileData, sizeof(char) * (expectedSize + 1));
+	DWORD actualSize = 0;
+	if (!ReadFile(this->hFile, fileData, expectedSize, &actualSize, NULL)) abort();
+	if (actualSize != expectedSize) abort();
 	std::string str(fileData);
 	std::istringstream stream(str);
 	std::string line;
