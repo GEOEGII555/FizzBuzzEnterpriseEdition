@@ -9,6 +9,9 @@ _console::_console() {
 	this->output = GetStdHandle(STD_OUTPUT_HANDLE);
 	this->input = GetStdHandle(STD_INPUT_HANDLE);
 	this->error = GetStdHandle(STD_ERROR_HANDLE);
+	
+	if (!SetConsoleCP(CP_UTF8)) abort();
+	if (!SetConsoleOutputCP(CP_UTF8)) abort();
 }
 
 void _console::writeOutput(const TCHAR str[]) {
